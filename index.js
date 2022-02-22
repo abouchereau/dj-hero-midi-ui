@@ -3,7 +3,7 @@ const app = express();
 const fs = require('fs');
 const childProcess = require('child_process');
 const packageJson = require('./package.json');
-const Const = require("./public/js/Const");
+const Const = require("./public/js/const");
 
 const getFiles = path => {
     const files = []
@@ -30,7 +30,7 @@ for(let file of files) {
 }
 
 
-let child = childProcess.fork(__dirname + "/src/child.js");
+childProcess.fork(__dirname + "/src/dj-hero-midi.js");
 
 app.listen(Const.APP_PORT, ()=>{
     console.log("Welcome to "+Const.APP_NAME+" - by "+packageJson.author+" - 2022");

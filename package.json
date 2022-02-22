@@ -1,7 +1,6 @@
 {
   "bin": "index.js",
-  "name": "My Super App",
-  "author": "Anthony Bouchereau",
+  "name": "DJ Hero Midi",
   "pkg": {
     "assets": [
       "public/**/*",
