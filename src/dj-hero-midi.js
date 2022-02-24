@@ -4,24 +4,32 @@ const Const = require("./../public/js/const");
 
 
 const socket = new server({httpServer: http.createServer().listen(Const.SOCKET_PORT, ()=>{})});
+let connection = null;
 socket.on('error', (err)=>console.error("Error: " + err.message));
 socket.on('request', (request) => {
-    let connection = request.accept(null, request.origin);
+    connection = request.accept(null, request.origin);
     console.log("Socket connected through port " + Const.SOCKET_PORT);
     connection.on('message', (msg) => {
-        let trucs = [
+        initSendData();
+       /* let trucs = [
             {"name": "Yop", "age": 25},
             {"name": "Yip", "age": 52},
             {"name": "Yup", "age": 15},
             {"name": "Yap", "age": 1}
         ];
-        connection.send(JSON.stringify(trucs));
+        connection.send(JSON.stringify(trucs));*/
     });
 });
 
+function initSendData() {
+    let midiNode = new MidiNode();
+    midiNode.scanOutput();
+    let json = {'midiOutDevices': midiNode.devices};
+    console.log("sending "+JSON.stringify(json));
+    connection.send(JSON.stringify(json));
+}
 
-
-
+/*
 const readline = require('readline');
 const MidiNode = require("./lib/MidiNode");
 const Manager = require("./lib/Manager");
@@ -70,7 +78,7 @@ function start() {
         defaultChannel = argv.defaultMidiChannel;
     }
     let manager = new Manager(midiNode, defaultChannel);
-    /*
+
         //automatic detection
         let devices = HID.devices();
         let oneConnected = false;
@@ -83,11 +91,13 @@ function start() {
             if (device.vendorId == DeviceDJHeroXbox.VENDOR_ID && device.productId == DeviceDJHeroXbox.PRODUCT_ID) {
 
             }
-        }*/
+        }
     let deviceDJHeroXbox = new DeviceDJHeroXbox(manager);
     deviceDJHeroXbox.init();
-    /*   oneConnected = true;
+       oneConnected = true;
        if (!oneConnected) {
            console.log("No DJ Hero detected :(");
-       }*/
+       }
 }
+
+ */
