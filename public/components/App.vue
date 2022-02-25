@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ appName }}</h1>
-    <midi-out-devices :list="socketData.midiOutDevices"></midi-out-devices>
+    <midi-out-devices :list="socketData.midiOutDevices" v-on:midiOutIndex="sendMidiOutIndex"></midi-out-devices>
   </div>
 </template>
 
@@ -31,10 +31,18 @@ export default {
       this.socket.onmessage = (msg) => {
         console.log("onmessage", msg);
         let data = JSON.parse(msg.data);
+        console.log("DATA IN ",data);
         for (let key in data) {
-          this.socketData[key] = data;
+          this.socketData[key] = data[key];
         }
       };
+      console.log("socketData",this.socketData, this.socketData.midiOutDevices);
+      setTimeout(()=> {
+        this.socket.send("INIT");
+      },100);
+    },
+    sendMidiOutIndex(index) {
+      this.socket.send(JSON.stringify({"midiOutIndex": index}));
     }
   }
 }

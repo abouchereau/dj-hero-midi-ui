@@ -23,7 +23,7 @@ app.get('/', (req, res)=>res.sendFile(__dirname +'/public/index.html'));
 //add dynamically all ressources for pkg
 let publicPath = __dirname+'/public';
 let files = getFiles(publicPath);
-for(let file of files) {
+for (let file of files) {
     app.get("/"+file, (req, res) =>{
         res.sendFile(publicPath+"/"+file);
     });
@@ -33,7 +33,7 @@ for(let file of files) {
 childProcess.fork(__dirname + "/src/dj-hero-midi.js");
 
 app.listen(Const.APP_PORT, ()=>{
-    console.log("Welcome to "+Const.APP_NAME+" - by "+packageJson.author+" - 2022");
+    console.log("Welcome to "+Const.APP_NAME+" - by "+Const.AUTHOR+" - "+Const.Year);
     console.log("");
     console.log(`Now please open your favorite browser and go the URL : http://localhost:${Const.APP_PORT}`)
 })

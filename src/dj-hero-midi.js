@@ -1,8 +1,9 @@
 const server = require('websocket').server;
 const http   = require('http');
 const Const = require("./../public/js/const");
+const MidiNode = require("./../lib/MidiNode");
 
-
+let midiNode = new MidiNode();
 const socket = new server({httpServer: http.createServer().listen(Const.SOCKET_PORT, ()=>{})});
 let connection = null;
 socket.on('error', (err)=>console.error("Error: " + err.message));
@@ -10,22 +11,28 @@ socket.on('request', (request) => {
     connection = request.accept(null, request.origin);
     console.log("Socket connected through port " + Const.SOCKET_PORT);
     connection.on('message', (msg) => {
-        initSendData();
-       /* let trucs = [
-            {"name": "Yop", "age": 25},
-            {"name": "Yip", "age": 52},
-            {"name": "Yup", "age": 15},
-            {"name": "Yap", "age": 1}
-        ];
-        connection.send(JSON.stringify(trucs));*/
+        if (msg.utf8Data == "INIT") {
+            initSendData();
+        }
+        else {
+            let json = JSON.parse(msg.utf8Data);
+            for (let key in json) {
+                let value = json[key];
+                if (key == "midiOutIndex") {
+                    midiNode.openFromIndex(value);
+                }
+            }            
+        }       
     });
 });
 
 function initSendData() {
-    let midiNode = new MidiNode();
+    midiNode = new MidiNode();
     midiNode.scanOutput();
+    if (midiNode.devices.length>0) {
+        midiNode.openFromIndex(0);
+    }
     let json = {'midiOutDevices': midiNode.devices};
-    console.log("sending "+JSON.stringify(json));
     connection.send(JSON.stringify(json));
 }
 
