@@ -1,6 +1,7 @@
 {
   "bin": "index.js",
-  "name": "DJ Hero Midi",
+  "name": "dj-hero-midi-ui",
+  "description": "DJ Hero Midi",
   "pkg": {
     "assets": [
       "public/**/*",
