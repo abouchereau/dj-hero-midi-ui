@@ -1,5 +1,5 @@
 class Const {
-    static get APP_NAME() {return "My Super App";}
+    static get APP_NAME() {return "DJ Hero MIDI";}
     static get AUTHOR() {return "Anthony BOUCHEREAU";}
     static get YEAR() {return 2022;}
     static get APP_PORT() {return 3615;}

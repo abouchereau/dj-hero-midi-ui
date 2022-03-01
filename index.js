@@ -33,7 +33,7 @@ for (let file of files) {
 childProcess.fork(__dirname + "/src/dj-hero-midi.js");
 
 app.listen(Const.APP_PORT, ()=>{
-    console.log("Welcome to "+Const.APP_NAME+" - by "+Const.AUTHOR+" - "+Const.Year);
+    console.log("Welcome to "+Const.APP_NAME+" - by "+Const.AUTHOR+" - "+Const.YEAR);
     console.log("");
     console.log(`Now please open your favorite browser and go the URL : http://localhost:${Const.APP_PORT}`)
 })

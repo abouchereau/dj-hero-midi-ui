@@ -28,12 +28,11 @@ socket.on('request', (request) => {
 
 function initSendData() {
     midiNode = new MidiNode();
-    midiNode.scanOutput();
-    if (midiNode.devices.length>0) {
-        midiNode.openFromIndex(0);
-    }
-    let json = {'midiOutDevices': midiNode.devices};
-    connection.send(JSON.stringify(json));
+    midiNode.scanOutput(()=>{
+        let json = {'midiOutDevices': midiNode.devices};
+        connection.send(JSON.stringify(json));
+    });
+
 }
 
 /*

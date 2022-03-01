@@ -17,7 +17,7 @@ export default {
     return {
       appName: Const.APP_NAME,
       socketData: {
-        'midiOutDevices': []
+        'midiOutDevices': null
       }
     }
   },
@@ -39,7 +39,7 @@ export default {
       console.log("socketData",this.socketData, this.socketData.midiOutDevices);
       setTimeout(()=> {
         this.socket.send("INIT");
-      },100);
+      },500);
     },
     sendMidiOutIndex(index) {
       this.socket.send(JSON.stringify({"midiOutIndex": index}));
