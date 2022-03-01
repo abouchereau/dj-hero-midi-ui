@@ -2,6 +2,7 @@
   <div>
     <h1>{{ appName }}</h1>
     <midi-out-devices :list="socketData.midiOutDevices" v-on:midiOutIndex="sendMidiOutIndex"></midi-out-devices>
+    <dj-hero-viewer></dj-hero-viewer>
   </div>
 </template>
 
@@ -11,7 +12,8 @@
 export default {
   name: 'app',
   components: {
-    'midi-out-devices': Vue.defineAsyncComponent(() => loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions()))
+    'midi-out-devices': Vue.defineAsyncComponent(() => loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions())),
+    'dj-hero-viewer': Vue.defineAsyncComponent(() => loadModule('./components/DjHeroViewer.vue', Utils.loadModuleOptions()))
   },
   data() {
     return {
@@ -26,17 +28,13 @@ export default {
   },
   methods: {
     initSocket() {
-      console.log("initSocket");
       this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
       this.socket.onmessage = (msg) => {
-        console.log("onmessage", msg);
         let data = JSON.parse(msg.data);
-        console.log("DATA IN ",data);
         for (let key in data) {
           this.socketData[key] = data[key];
         }
       };
-      console.log("socketData",this.socketData, this.socketData.midiOutDevices);
       setTimeout(()=> {
         this.socket.send("INIT");
       },500);
