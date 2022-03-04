@@ -24,12 +24,14 @@
               </div>
             </div>
 
+            "TRIANGLE","CROSS","SQUARE","CIRCLE",
+
             <div class="col">
               <div class="relative">
-                <button class="btn btn-outline-success" disabled id="btn-up" ref="btn-up"><i class="icon-arrow-up"></i></button>
-                <button class="btn btn-outline-success" disabled id="btn-down" ref="btn-down"><i class="icon-arrow-down"></i></button>
-                <button class="btn btn-outline-success" disabled id="btn-left" ref="btn-left"><i class="icon-arrow-left"></i></button>
-                <button class="btn btn-success" id="btn-right" ref="btn-right"><i class="icon-arrow-right"></i></button>
+                <button class="btn btn-outline-success btn-ps" disabled id="btn-triangle" ref="btn-triangle"><img src="/icones/triangle.svg" /></button>
+               <!-- <button class="btn btn-outline-success" disabled id="btn-cross" ref="btn-cross"><i class="icon-arrow-down"></i></button>
+                <button class="btn btn-outline-success" disabled id="btn-square" ref="btn-square"><i class="icon-arrow-left"></i></button>
+                <button class="btn btn-success" id="btn-circle" ref="btn-circle"><i class="icon-arrow-right"></i></button>-->
               </div>
             </div>
 
@@ -96,7 +98,15 @@ export default {
   #btn-home {top:10px;left:60px;}
   #btn-select {top:80px;left:10px;}
   #btn-start {top:80px;left:100px;}
+  .btn-ps {
+    padding:7px !important;
+  }
   .btn {
     border-radius:100px !important;
+  }
+  .btn-ps img {
+    width:25px;
+    position:relative;
+    bottom:3px;
   }
 </style>
