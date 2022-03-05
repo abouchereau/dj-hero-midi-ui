@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/js/const.js"></script>
     <script src="/js/vue.js"></script>
+    <script src="/js/vue-router.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/vue3-sfc-loader.js"></script>
     <link href="/css/bootstrap.css" rel="stylesheet">
@@ -19,7 +20,22 @@
 
 <script>
     const { loadModule } = window['vue3-sfc-loader'];
-    Vue.createApp({
+
+    const routes = [
+        { path: '/', component: () => loadModule('./components/Panel.vue', Utils.loadModuleOptions()) },
+        { path: '/settings', component: () => loadModule('./components/Settings.vue', Utils.loadModuleOptions())  },
+        { path: '/about', component: () => loadModule('./components/About.vue', Utils.loadModuleOptions())  },
+    ];
+
+    const router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
+        routes,
+    });
+
+
+
+
+    const app = Vue.createApp({
         components: {
             'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/Navbar.vue', Utils.loadModuleOptions())),
             'app': Vue.defineAsyncComponent( () => loadModule('./components/App.vue', Utils.loadModuleOptions()) )
@@ -30,7 +46,9 @@
                 title : Const.APP_NAME
             }
         }
-    }).mount('#app');
+    })
+    app.use(router);
+    app.mount('#app');
 </script>
 <script src="/js/bootstrap.js"></script>
 </body>
