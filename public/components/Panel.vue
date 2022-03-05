@@ -2,7 +2,6 @@
   <div>
     <h5>Panel</h5>
     <dj-hero-viewer></dj-hero-viewer>
-    <midi-out-devices></midi-out-devices>
   </div>
 </template>
 
@@ -13,8 +12,7 @@ export default {
     socketData: Object
   },
   components: {
-    'dj-hero-viewer': Vue.defineAsyncComponent( ()=>loadModule('./components/DjHeroViewer.vue', Utils.loadModuleOptions())),
-    'midi-out-devices': Vue.defineAsyncComponent( ()=>loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions()))
+    'dj-hero-viewer': Vue.defineAsyncComponent( ()=>loadModule('./components/DjHeroViewer.vue', Utils.loadModuleOptions()))
   },
 }
 </script>

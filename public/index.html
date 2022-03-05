@@ -48,6 +48,7 @@
         }
     })
     app.use(router);
+    app.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions())));
     app.mount('#app');
 </script>
 <script src="/js/bootstrap.js"></script>
