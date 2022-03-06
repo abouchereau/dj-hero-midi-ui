@@ -1,30 +1,32 @@
 <!doctype html>
-<html id="app">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="/js/const.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
+    <script src="/js/mitt.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/vue3-sfc-loader.js"></script>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <title>{{ title }}</title>
+    <title>DJ Hero Midi</title>
 </head>
 <body>
+<div id="app">
     <navbar></navbar>
     <div class="container">
         <app></app>
     </div>
-
+</div>
 <script>
     const { loadModule } = window['vue3-sfc-loader'];
 
     const routes = [
-        { path: '/', component: () => loadModule('./components/Panel.vue', Utils.loadModuleOptions()) },
-        { path: '/settings', component: () => loadModule('./components/Settings.vue', Utils.loadModuleOptions())  },
-        { path: '/about', component: () => loadModule('./components/About.vue', Utils.loadModuleOptions())  },
+        { path: '/', component: () => loadModule('./components/page/Panel.vue', Utils.loadModuleOptions()) },
+        { path: '/settings', component: () => loadModule('./components/page/Settings.vue', Utils.loadModuleOptions())  },
+        { path: '/about', component: () => loadModule('./components/page/About.vue', Utils.loadModuleOptions())  },
     ];
 
     const router = VueRouter.createRouter({
@@ -32,12 +34,10 @@
         routes,
     });
 
-
-
-
+    const emitter = mitt();
     const app = Vue.createApp({
         components: {
-            'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/Navbar.vue', Utils.loadModuleOptions())),
+            'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/block/Navbar.vue', Utils.loadModuleOptions())),
             'app': Vue.defineAsyncComponent( () => loadModule('./components/App.vue', Utils.loadModuleOptions()) )
         },
         data() {
@@ -48,7 +48,11 @@
         }
     })
     app.use(router);
-    app.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions())));
+    app.config.globalProperties.$emitter = emitter;
+
+    //why this works only as global component ?? don't know
+    app.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/block/MidiOutDevices.vue', Utils.loadModuleOptions())));
+
     app.mount('#app');
 </script>
 <script src="/js/bootstrap.js"></script>

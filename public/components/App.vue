@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view class="mt-2" :socketData="socketData"></router-view>
+    <router-view class="mt-2" :socketData="socketData" @sendSocket="sendSocket"></router-view>
   </div>
 </template>
 
@@ -9,10 +9,6 @@
 
 export default {
   name: 'app',
-  /*components: {
-    'midi-out-devices': Vue.defineAsyncComponent(() => loadModule('./components/MidiOutDevices.vue', Utils.loadModuleOptions())),
-    'dj-hero-viewer': Vue.defineAsyncComponent(() => loadModule('./components/DjHeroViewer.vue', Utils.loadModuleOptions()))
-  },*/
   data() {
     return {
       appName: Const.APP_NAME,
@@ -23,6 +19,10 @@ export default {
   },
   mounted() {
     this.initSocket();
+    setTimeout(() => {
+      console.log("hey");
+      this.$emitter.emit("yop");
+    }, 2000);
   },
   methods: {
     initSocket() {
@@ -36,6 +36,9 @@ export default {
       setTimeout(()=> {
         this.socket.send("INIT");
       },500);
+    },
+    sendSocket(obj) {
+      this.socket.send(JSON.stringify(obj));
     },
     sendMidiOutIndex(index) {
       this.socket.send(JSON.stringify({"midiOutIndex": index}));

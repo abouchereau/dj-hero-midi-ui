@@ -77,6 +77,11 @@ export default {
   name: 'dj-hero-viewer',
   props: {
   },
+  mounted() {
+    this.$emitter.on("yop", ()=>{
+      console.log("YOPYOP");
+    });
+  },
   data() {
     return {
     }

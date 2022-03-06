@@ -12,7 +12,7 @@ export default {
     socketData: Object
   },
   components: {
-    'dj-hero-viewer': Vue.defineAsyncComponent( ()=>loadModule('./components/DjHeroViewer.vue', Utils.loadModuleOptions()))
+    'dj-hero-viewer': Vue.defineAsyncComponent( ()=>loadModule('./components/block/DjHeroViewer.vue', Utils.loadModuleOptions()))
   },
 }
 </script>
