@@ -76,22 +76,8 @@
 export default {
   name: 'dj-hero-viewer',
   props: {
+    app: Object
   },
-  mounted() {
-    this.$emitter.on("yop", ()=>{
-      console.log("YOPYOP");
-    });
-  },
-  data() {
-    return {
-    }
-  },
-  watch: {
-
-  },
-  methods: {
-
-  }
 
 }
 </script>

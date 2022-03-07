@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       appName: Const.APP_NAME,
-      app: null
+      app: null,
       socketData: {
         'midiOutDevices': null
       }

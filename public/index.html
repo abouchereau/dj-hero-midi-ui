@@ -34,7 +34,6 @@
         routes,
     });
 
-    const emitter = mitt();
     const vueApp = Vue.createApp({
         components: {
             'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/block/Navbar.vue', Utils.loadModuleOptions())),
@@ -48,7 +47,6 @@
         }
     })
     vueApp.use(router);
-    vueApp.config.globalProperties.$emitter = emitter;
 
     //why this works only as global component ?? don't know
     vueApp.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/block/MidiOutDevices.vue', Utils.loadModuleOptions())));
