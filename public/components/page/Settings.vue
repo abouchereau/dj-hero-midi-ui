@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5>Settings</h5>
-   <midi-out-devices :list="socketData['midiOutDevices']" @midiOutIndex="sendMidiOutIndex"></midi-out-devices>
+   <midi-out-devices :app="app"></midi-out-devices>
   </div>
 </template>
 
@@ -9,13 +9,13 @@
 export default {
   name: 'settings',
   props: {
-    socketData: Object
-  },
-  methods: {
+    app: Object
+  }
+ /* methods: {
     sendMidiOutIndex(index) {
       this.$emit("sendSocket",{"midiOutIndex": index});
     }
-  }
+  }*/
 
 }
 </script>

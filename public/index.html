@@ -6,9 +6,9 @@
     <script src="/js/const.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
-    <script src="/js/mitt.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/vue3-sfc-loader.js"></script>
+    <script src="/js/app.js"></script>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
     <title>DJ Hero Midi</title>
@@ -35,7 +35,7 @@
     });
 
     const emitter = mitt();
-    const app = Vue.createApp({
+    const vueApp = Vue.createApp({
         components: {
             'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/block/Navbar.vue', Utils.loadModuleOptions())),
             'app': Vue.defineAsyncComponent( () => loadModule('./components/App.vue', Utils.loadModuleOptions()) )
@@ -47,13 +47,13 @@
             }
         }
     })
-    app.use(router);
-    app.config.globalProperties.$emitter = emitter;
+    vueApp.use(router);
+    vueApp.config.globalProperties.$emitter = emitter;
 
     //why this works only as global component ?? don't know
-    app.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/block/MidiOutDevices.vue', Utils.loadModuleOptions())));
+    vueApp.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/block/MidiOutDevices.vue', Utils.loadModuleOptions())));
 
-    app.mount('#app');
+    vueApp.mount('#app');
 </script>
 <script src="/js/bootstrap.js"></script>
 </body>

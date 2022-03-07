@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view class="mt-2" :socketData="socketData" @sendSocket="sendSocket"></router-view>
+    <router-view class="mt-2" :app="app"></router-view>
   </div>
 </template>
 
@@ -12,19 +12,16 @@ export default {
   data() {
     return {
       appName: Const.APP_NAME,
+      app: null
       socketData: {
         'midiOutDevices': null
       }
     }
   },
   mounted() {
-    this.initSocket();
-    setTimeout(() => {
-      console.log("hey");
-      this.$emitter.emit("yop");
-    }, 2000);
-  },
-  methods: {
+    this.app = new App();
+  }
+ /* methods: {
     initSocket() {
       this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
       this.socket.onmessage = (msg) => {
@@ -43,7 +40,7 @@ export default {
     sendMidiOutIndex(index) {
       this.socket.send(JSON.stringify({"midiOutIndex": index}));
     }
-  }
+  }*/
 }
 </script>
 <style>
