@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view class="mt-2" :app="app"></router-view>
+    <router-view class="mt-2"></router-view>
   </div>
 </template>
 
@@ -11,16 +11,10 @@ export default {
   name: 'app',
   data() {
     return {
-      appName: Const.APP_NAME,
-      app: null,
-      socketData: {
-        'midiOutDevices': null
-      }
+      appName: Const.APP_NAME
     }
   },
-  mounted() {
-    this.app = new App();
-  }
+
  /* methods: {
     initSocket() {
       this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);

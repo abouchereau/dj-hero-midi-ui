@@ -31,9 +31,9 @@ export default {
     logIn: Array
   },
   mounted() {
-    this.$emitter.on("yop", ()=>{
+   /* this.$emitter.on("yop", ()=>{
       console.log("YOPYOP");
-    });
+    });*/
   },
   data() {
     return {

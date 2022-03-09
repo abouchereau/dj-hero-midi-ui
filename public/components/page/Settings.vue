@@ -1,26 +1,34 @@
 <template>
   <div>
     <h5>Settings</h5>
-   <midi-out-devices :app="app" :key="app.key"></midi-out-devices>
+   <midi-out-devices :key="key"></midi-out-devices>
   </div>
 </template>
 
 <script>
 export default {
   name: 'settings',
-  props: {
-    app: Object
-  },
   data() {
     return {
-      key: 0
+      key:0
     }
   },
+
   mounted() {
-    /*setInterval(()=> {
-      /this.key++;
+   /* setInterval(()=> {
+      this.key++;
     },200);*/
 
+  },
+  watch: {
+    $main: {
+      handler(newQuestion) {
+        console.log("WAOUH");
+      },
+      // force eager callback execution
+      deep: true
+    }
+    }
   }
  /* methods: {
     sendMidiOutIndex(index) {

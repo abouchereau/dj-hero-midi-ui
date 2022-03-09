@@ -75,9 +75,6 @@
 <script>
 export default {
   name: 'dj-hero-viewer',
-  props: {
-    app: Object
-  },
 
 }
 </script>

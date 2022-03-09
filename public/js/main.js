@@ -1,14 +1,10 @@
-class App {
+class Main {
 
     socket = null;
     midiOutIndex = 0;
-    data = null;//mirror of socketData
-    key = 0;
+    midiOutDevices = null;
 
     constructor() {
-        this.data = {
-            midiOutDevices: null
-        };
         this.initSocket();
     }
 
@@ -18,10 +14,10 @@ class App {
             console.log("SOCKET", msg);
             let data = JSON.parse(msg.data);
             for (let key in data) {
-                this.data[key] = data[key];
+                if (key == "midiOutDevices") {
+                    this.midiOutDevices = data[key];
+                }
             }
-            this.key++;
-            console.log("SOCKET", this.data);
         };
         setTimeout(()=> {
             this.socket.send("INIT");

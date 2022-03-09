@@ -3,12 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <script src="/js/const.js"></script>
     <script src="/js/vue.js"></script>
     <script src="/js/vue-router.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/vue3-sfc-loader.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="/js/main.js"></script>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
     <title>DJ Hero Midi</title>
@@ -33,7 +34,7 @@
         history: VueRouter.createWebHashHistory(),
         routes,
     });
-
+    let main = new Main();
     const vueApp = Vue.createApp({
         components: {
             'navbar': Vue.defineAsyncComponent( ()=>loadModule('./components/block/Navbar.vue', Utils.loadModuleOptions())),
@@ -41,16 +42,15 @@
         },
         data() {
             return {
-                message: 'Hello Vue!',
-                title : Const.APP_NAME
+                main: main
             }
-        }
-    })
+        },
+            })
     vueApp.use(router);
 
     //why this works only as global component ?? don't know
     vueApp.component('midi-out-devices', Vue.defineAsyncComponent( ()=>loadModule('./components/block/MidiOutDevices.vue', Utils.loadModuleOptions())));
-
+    vueApp.config.globalProperties.$main = main;
     vueApp.mount('#app');
 </script>
 <script src="/js/bootstrap.js"></script>
