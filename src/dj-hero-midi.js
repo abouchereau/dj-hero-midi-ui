@@ -2,17 +2,23 @@ const server = require('websocket').server;
 const http   = require('http');
 const Const = require("./../public/js/const");
 const MidiNode = require("./../lib/MidiNode");
+const DeviceDJHeroPS = require("./../lib/DeviceDJHeroPS");
+const Manager = require("./../lib/Manager");
+const HID = require('node-hid');
 
 let midiNode = new MidiNode();
 const socket = new server({httpServer: http.createServer().listen(Const.SOCKET_PORT, ()=>{})});
 let connection = null;
+let manager = new Manager(midiNode, 0);
+
 socket.on('error', (err)=>console.error("Error: " + err.message));
 socket.on('request', (request) => {
     connection = request.accept(null, request.origin);
     console.log("Socket connected through port " + Const.SOCKET_PORT);
     connection.on('message', (msg) => {
         if (msg.utf8Data == "INIT") {
-            initSendData();
+            initMidiOut();
+            initDJHeroPs();
         }
         else {
             let json = JSON.parse(msg.utf8Data);
@@ -26,14 +32,29 @@ socket.on('request', (request) => {
     });
 });
 
-function initSendData() {
+function initMidiOut() {
     midiNode = new MidiNode();
     midiNode.scanOutput(()=>{
         let json = {'midiOutDevices': midiNode.devices};
         connection.send(JSON.stringify(json));
     });
-
 }
+
+function initDJHeroPs() {
+    let devices = HID.devices();
+    console.log("devices", devices);
+    let oneConnected = false;
+    for (let device of devices) {
+        if (device.vendorId == DeviceDJHeroPS.VENDOR_ID && device.productId == DeviceDJHeroPS.PRODUCT_ID) {
+            let deviceDJHeroPS = new DeviceDJHeroPS(manager);
+            deviceDJHeroPS.init();
+            oneConnected = true;
+        }
+    }
+    let json = {'djheroConnnected':oneConnected};
+    connection.send(JSON.stringify(json));
+}
+
 
 /*
 const readline = require('readline');

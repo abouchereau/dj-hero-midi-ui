@@ -2,7 +2,7 @@
   <div>
 
     <div class="card border-info mb-3">
-      <div class="card-header">DJ Hero</div>
+      <div class="card-header">DJ Hero <i :class="{'icon':true, 'icon-off': true, 'text-danger': $main.djheroConnected, 'text-success': !$main.djheroConnected}"></i></div>
       <div class="card-body">
         <div class="card-text" >
 
