@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view class="mt-2"></router-view>
+    <router-view class="mt-2" :key="key"></router-view>
   </div>
 </template>
 
@@ -11,30 +11,15 @@ export default {
   name: 'app',
   data() {
     return {
-      appName: Const.APP_NAME
+      appName: Const.APP_NAME,
+      key: 0
     }
   },
-
- /* methods: {
-    initSocket() {
-      this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
-      this.socket.onmessage = (msg) => {
-        let data = JSON.parse(msg.data);
-        for (let key in data) {
-          this.socketData[key] = data[key];
-        }
-      };
-      setTimeout(()=> {
-        this.socket.send("INIT");
-      },500);
-    },
-    sendSocket(obj) {
-      this.socket.send(JSON.stringify(obj));
-    },
-    sendMidiOutIndex(index) {
-      this.socket.send(JSON.stringify({"midiOutIndex": index}));
-    }
-  }*/
+  mounted() {
+    window.emitter.on('socketLoaded',()=> {
+      this.key++;
+    });
+  }
 }
 </script>
 <style>
