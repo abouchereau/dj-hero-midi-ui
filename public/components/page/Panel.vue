@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5>Panel</h5>
-    <dj-hero-viewer :key="key"></dj-hero-viewer>
+    <dj-hero-viewer :key="refKey"></dj-hero-viewer>
   </div>
 </template>
 
@@ -13,12 +13,12 @@ export default {
   },
   data() {
     return {
-      key: 0
+      refKey: 0
     }
   },
   mounted() {
     window.emitter.on('socketLoaded',()=> {
-      this.key++;
+      this.refKey++;
     });
   }
 }

@@ -13,7 +13,7 @@ class Main {
         this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
         this.socket.onmessage = (msg) => {
             let data = JSON.parse(msg.data);
-            console.log("SOCKET", data);
+            console.log("SOCKET", JSON.stringify(data));
             for (let key in data) {
                 if (key == "midiOutDevices") {
                     this.midiOutDevices = data[key];
@@ -21,8 +21,11 @@ class Main {
                 if (key == "djheroConnected") {
                     this.djheroConnected = data[key];
                 }
+                if (key == "djheroChange") {
+                    window.emitter.emit('djheroChange',{data[key][0]:data[key][1]});
+                    this.djheroConnected = data[key];
+                }
             }
-
             window.emitter.emit('socketLoaded');
         };
         setTimeout(()=> {
