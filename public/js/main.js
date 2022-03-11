@@ -17,16 +17,17 @@ class Main {
             for (let key in data) {
                 if (key == "midiOutDevices") {
                     this.midiOutDevices = data[key];
+                    window.emitter.emit('socketLoaded');
                 }
                 if (key == "djheroConnected") {
                     this.djheroConnected = data[key];
+                    window.emitter.emit('socketLoaded');
                 }
                 if (key == "djheroChange") {
-                    window.emitter.emit('djheroChange',{data[key][0]:data[key][1]});
+                    window.emitter.emit('djheroChange',data[key]);
                     this.djheroConnected = data[key];
                 }
             }
-            window.emitter.emit('socketLoaded');
         };
         setTimeout(()=> {
             this.socket.send("INIT");

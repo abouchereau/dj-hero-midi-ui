@@ -4,7 +4,7 @@
     <div class="card border-primary mb-3" style="max-width: 30rem;">
       <div class="card-header">Select MIDI Output</div>
       <div class="card-body">
-        <div class="card-text">
+        <div class="card-text" :key="refreshKey">
           <div class="bs-component" v-if="$main.midiOutDevices!=null">
             <ul class="list-group">
               <li v-for="(item, index) in $main.midiOutDevices" @click="$main.setMidiOutIndex(index)" :class="{ 'active': index==$main.midiOutIndex, 'list-group-item' : true, 'list-group-item-action':true}" >
@@ -27,7 +27,18 @@
 
 <script>
 export default {
-  name: 'midi-out-devices'
+  name: 'midi-out-devices',
+  data() {
+    return {
+      refreshKey: 0
+    }
+  },
+  mounted() {
+    window.emitter.on('socketLoaded',()=> {
+      this.refreshKey++;
+    });
+  }
+
 
   /*watch: {//TODO remettre la logique main.js
     list(newList, oldList) {

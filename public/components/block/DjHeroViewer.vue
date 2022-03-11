@@ -2,7 +2,7 @@
   <div>
 
     <div class="card border-info mb-3">
-      <div class="card-header">
+      <div class="card-header" :key="refreshKey">
         <i class="icon icon-off text-dark" v-if="!$main.djheroConnected"></i>
         <i class="icon icon-off text-success" v-if="$main.djheroConnected"></i>
         DJ Hero
@@ -46,24 +46,25 @@
 
                 <div class="col-4 text-center">
 
-                  <div class="btn-group me-2" role="group">
-                    <button type="button" class="btn btn-info">1</button>
-                    <button type="button" class="btn btn-info" disabled>2</button>
-                    <button type="button" class="btn btn-info" disabled>3</button>
-                    <button type="button" class="btn btn-info" disabled>4</button>
-                  </div>
+                  <ul class="pagination" id="knob">
+                    <li id="knob1" class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li id="knob2" class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li id="knob3" class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li id="knob4" class="page-item"><a class="page-link" href="#">4</a></li>
+                  </ul>
+
                 </div>
 
-                <div class="col-8 text-center">
-                  <input type="range" class="form-range" id="fader">
+                <div class="col-4 text-center offset-sm-2">
+                  <input type="range" class="form-range" id="fader" min="0" max="1023">
                 </div>
               </div>
             </div>
 
             <div class="col-4 text-center p-1">
 
-              <div id="disc">
-                <img src="/icones/tony-b.svg" />
+              <div >
+                <img src="/icones/tony-b.svg" id="disc"/>
               </div>
             </div>
           </div>
@@ -79,10 +80,40 @@
 <script>
 export default {
   name: 'dj-hero-viewer',
-
+  data() {
+    return {
+      refreshKey: 0,
+      degree: 0,
+      disc: null
+    }
+  },
+  mounted() {
+    this.disc = document.getElementById('disc');
+    console.log("CREATED");
+    window.emitter.on('socketLoaded',()=> {
+      this.refreshKey++;
+    });
+    window.emitter.on('djheroChange',(a)=>{
+      console.log("ON",a)
+      if (a[0]=="FADER") {
+        document.getElementById('fader').value = a[1];
+      }
+      if (a[0]=="KNOB") {
+        document.querySelectorAll('#knob li').forEach((a)=>a.classList.remove('active'));
+        document.querySelector('#knob'+a[1]).classList.add('active');
+      }
+      if (a[0]=="DISC") {
+        this.degree = Math.round(this.degree+(a[1]*0.75));
+        this.disc.style.transform = 'rotate(' + this.degree  + 'deg)';
+      }
+    });
+  }
 }
 </script>
 <style>
+#disc {
+  transition:  transform 0.1s;
+}
 .joy-container {
   position: relative;
   width:130px;

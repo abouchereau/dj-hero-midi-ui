@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-view class="mt-2" :key="key"></router-view>
+    <router-view class="mt-2"></router-view>
   </div>
 </template>
 
@@ -12,13 +12,7 @@ export default {
   data() {
     return {
       appName: Const.APP_NAME,
-      key: 0
     }
-  },
-  mounted() {
-    window.emitter.on('socketLoaded',()=> {
-      this.key++;
-    });
   }
 }
 </script>
