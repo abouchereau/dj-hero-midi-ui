@@ -19,13 +19,16 @@ class Main {
                     this.midiOutDevices = data[key];
                     window.emitter.emit('socketLoaded');
                 }
-                if (key == "djheroConnected") {
+                else if (key == "djheroConnected") {
                     this.djheroConnected = data[key];
                     window.emitter.emit('socketLoaded');
                 }
-                if (key == "djheroChange") {
+                else if (key == "djheroChange") {
                     window.emitter.emit('djheroChange',data[key]);
                     this.djheroConnected = data[key];
+                }
+                else if (key == "midiOut") {
+                    window.emitter.emit('midiOut',data[key]);
                 }
             }
         };

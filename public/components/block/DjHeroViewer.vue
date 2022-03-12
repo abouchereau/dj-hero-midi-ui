@@ -17,28 +17,28 @@
 
                 <div class="col text-center">
                   <div class="joy-container">
-                    <button class="btn btn-outline-info" disabled id="btn-up" ref="btn-up"><i class="icon-arrow-up"></i></button>
-                    <button class="btn btn-outline-info" disabled id="btn-down" ref="btn-down"><i class="icon-arrow-down"></i></button>
-                    <button class="btn btn-outline-info" disabled id="btn-left" ref="btn-left"><i class="icon-arrow-left"></i></button>
-                    <button class="btn btn-info" id="btn-right" ref="btn-right"><i class="icon-arrow-right"></i></button>
+                    <button class="btn btn-outline-info" id="btn-up" ref="btn-up"><i class="icon-arrow-up"></i></button>
+                    <button class="btn btn-outline-info" id="btn-down" ref="btn-down"><i class="icon-arrow-down"></i></button>
+                    <button class="btn btn-outline-info" id="btn-left" ref="btn-left"><i class="icon-arrow-left"></i></button>
+                    <button class="btn btn-outline-info" id="btn-right" ref="btn-right"><i class="icon-arrow-right"></i></button>
                   </div>
                 </div>
 
                 <div class="col text-center">
                   <div class="joy-container">
-                    <button class="btn btn-outline-info btn-lg" disabled id="btn-home" ref="btn-up"><i class="icon-home"></i></button>
-                    <button class="btn btn-outline-info btn-sm" disabled id="btn-select" ref="btn-down">SELECT</button>
-                    <button class="btn btn-outline-info btn-sm" disabled id="btn-start" ref="btn-left">START</button>
+                    <button class="btn btn-outline-info btn-lg" id="btn-home" ref="btn-up"><i class="icon-home"></i></button>
+                    <button class="btn btn-outline-info btn-sm" id="btn-select" ref="btn-down">SELECT</button>
+                    <button class="btn btn-outline-info btn-sm" id="btn-start" ref="btn-left">START</button>
                   </div>
                 </div>
 
 
                 <div class="col text-center">
                   <div class="joy-container">
-                    <button class="btn btn-outline-info btn-ps" disabled id="btn-triangle" ref="btn-triangle"><img src="/icones/triangle.svg" style="bottom:3px"/></button>
-                    <button class="btn btn-outline-info btn-ps" disabled id="btn-cross" ref="btn-cross"><img src="/icones/cross.svg" /></button>
-                    <button class="btn btn-outline-info btn-ps" disabled id="btn-square" ref="btn-square"><img src="/icones/square.svg" /></button>
-                    <button class="btn btn-info btn-ps" id="btn-circle" ref="btn-circle"><img src="/icones/circle.svg" /></button>
+                    <button class="btn btn-outline-info btn-ps" id="btn-triangle" ref="btn-triangle"><img src="/icones/triangle.svg" style="bottom:3px"/></button>
+                    <button class="btn btn-outline-info btn-ps" id="btn-cross" ref="btn-cross"><img src="/icones/cross.svg" /></button>
+                    <button class="btn btn-outline-info btn-ps" id="btn-square" ref="btn-square"><img src="/icones/square.svg" /></button>
+                    <button class="btn btn-outline-info btn-ps" id="btn-circle" ref="btn-circle"><img src="/icones/circle.svg" /></button>
                   </div>
                 </div>
               </div>
@@ -46,12 +46,19 @@
 
                 <div class="col-4 text-center">
 
-                  <ul class="pagination" id="knob">
-                    <li id="knob1" class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li id="knob2" class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li id="knob3" class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li id="knob4" class="page-item"><a class="page-link" href="#">4</a></li>
-                  </ul>
+                  <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="knob" id="knob1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="knob1">1</label>
+
+                    <input type="radio" class="btn-check" name="knob" id="knob2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="knob2">2</label>
+
+                    <input type="radio" class="btn-check" name="knob" id="knob3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="knob3">3</label>
+
+                    <input type="radio" class="btn-check" name="knob" id="knob4" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="knob4">4</label>
+                  </div>
 
                 </div>
 
@@ -84,27 +91,39 @@ export default {
     return {
       refreshKey: 0,
       degree: 0,
-      disc: null
+      disc: null,
+      fader: null
     }
   },
   mounted() {
     this.disc = document.getElementById('disc');
-    console.log("CREATED");
+    this.fader = document.getElementById('fader');
     window.emitter.on('socketLoaded',()=> {
       this.refreshKey++;
     });
     window.emitter.on('djheroChange',(a)=>{
-      console.log("ON",a)
       if (a[0]=="FADER") {
-        document.getElementById('fader').value = a[1];
+        this.fader.value = a[1];
       }
-      if (a[0]=="KNOB") {
-        document.querySelectorAll('#knob li').forEach((a)=>a.classList.remove('active'));
-        document.querySelector('#knob'+a[1]).classList.add('active');
+      else if (a[0]=="KNOB") {
+        document.getElementById('knob'+a[1]).checked = true
       }
-      if (a[0]=="DISC") {
-        this.degree = Math.round(this.degree+(a[1]*0.75));
+      else if (a[0]=="DISC") {
+        this.degree = this.degree+(a[1]*0.75);
         this.disc.style.transform = 'rotate(' + this.degree  + 'deg)';
+      }
+      else {
+        let id = "btn-"+a[0].toLowerCase();
+        if (document.getElementById(id)) {
+          if (a[1] == "PRESS") {
+            document.getElementById(id).classList.remove('btn-outline-info');
+            document.getElementById(id).classList.add('btn-info');
+          }
+          else if (a[1] == "RELEASE") {
+            document.getElementById(id).classList.remove('btn-info');
+            document.getElementById(id).classList.add('btn-outline-info');
+          }
+        }
       }
     });
   }
