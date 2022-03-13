@@ -8,19 +8,20 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th scope="col">Time</th>
-            <th scope="col">Channel</th>
-            <th scope="col">Command</th>
-            <th scope="col">Param 1</th>
-            <th scope="col">Param 2</th>
+            <th>Time</th>
+            <th>Channel</th>
+            <th>Command</th>
+            <th>Param 1</th>
+            <th>Param 2</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="log in logs">
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <td>{{ log.time }}</td>
+            <td>{{ log.channel }}</td>
+            <td>{{ log.command }}</td>
+            <td>{{ log.param1 }}</td>
+            <td>{{ log.param2 }}</td>
           </tr>
 
           </tbody>
@@ -33,19 +34,38 @@
 <script>
 export default {
   name: 'log-midi-out',
-  props: {
-    logIn: Array
-  },
   mounted() {
-    window.emitter.on("midiOut", (a)=>{
-       console.log("midiOut",a);
-     });
+    this.midiMsg = new MidiMsg();
+    window.emitter.on("midiOut", (data)=> {
+      this.logs.unshift(this.midiMsg2log(data));
+      this.logs = this.logs.slice(0,15);
+    });
   },
   data() {
     return {
-      logs: []
+      logs: [],
+      midiMsg: null
+    }
+  },
+  methods: {
+    midiMsg2log(data) {
+      let log = {"time": "", "channel": "", "command": "", "param1": "", "param2": ""};
+      log.time = new Date().toJSON().substr(11, 12);
+      let cmd = data[0] >> 4;
+      log.channel = (data[0] & 0xf) + 1;
+      log.command = this.midiMsg.cmds[cmd];
+      if (cmd == 11) {//CC
+        log.param1 = data[1] + " (" + this.midiMsg.ccs[data[1]] + ")";
+      } else if (cmd == 8 || cmd == 9) {
+        log.param1 = data[1] + " (note?)";
+      } else {
+        log.param1 = data[1];
+      }
+      log.param2 = data[2];
+      return log;
     }
   }
+
 
 }
 </script>
