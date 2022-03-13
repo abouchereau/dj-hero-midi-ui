@@ -36,24 +36,24 @@ class MidiMsg {
             'Expression',//11
             'Effect Controller 1',//12
             'Effect Controller 2',//13
-            'Undefined',//14
-            'Undefined',//15
+            '',//14
+            '',//15
             'General Purpose',//16
             'General Purpose',//17
             'General Purpose',//18
             'General Purpose',//19
-            'Undefined',//20
-            'Undefined',//21
-            'Undefined',//22
-            'Undefined',//23
-            'Undefined',//24
-            'Undefined',//25
-            'Undefined',//26
-            'Undefined',//27
-            'Undefined',//28
-            'Undefined',//29
-            'Undefined',//30
-            'Undefined',//31
+            '',//20
+            '',//21
+            '',//22
+            '',//23
+            '',//24
+            '',//25
+            '',//26
+            '',//27
+            '',//28
+            '',//29
+            '',//30
+            '',//31
             'Least Significant Bit (LSB)',//32
             'Least Significant Bit (LSB)',//33
             'Least Significant Bit (LSB)',//34
@@ -124,24 +124,24 @@ class MidiMsg {
             'Non-Registered Parameter Number MSB (NRPN)',//99
             'Registered Parameter Number LSB (RPN)',//100
             'Registered Parameter Number MSB (RPN)',//101
-            'Undefined',//102
-            'Undefined',//103
-            'Undefined',//104
-            'Undefined',//105
-            'Undefined',//106
-            'Undefined',//107
-            'Undefined',//108
-            'Undefined',//109
-            'Undefined',//110
-            'Undefined',//111
-            'Undefined',//112
-            'Undefined',//113
-            'Undefined',//114
-            'Undefined',//115
-            'Undefined',//116
-            'Undefined',//117
-            'Undefined',//118
-            'Undefined',//119
+            '',//102
+            '',//103
+            '',//104
+            '',//105
+            '',//106
+            '',//107
+            '',//108
+            '',//109
+            '',//110
+            '',//111
+            '',//112
+            '',//113
+            '',//114
+            '',//115
+            '',//116
+            '',//117
+            '',//118
+            '',//119
             'All Sound Off',//120
             'Reset All Controllers',//121
             'Local On/Off Switch',//122
@@ -150,5 +150,9 @@ class MidiMsg {
             'Omni Mode On',//125
             'Mono Mode',//126
             'Poly Mode'];//127
+    }
+
+    midiNote(midiVal) {
+        return ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"][midiVal%12]+(Math.floor(midiVal/12)-1);
     }
 }

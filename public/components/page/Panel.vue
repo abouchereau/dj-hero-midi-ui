@@ -1,8 +1,15 @@
 <template>
   <div>
-    <h5>Panel</h5>
-    <dj-hero-viewer></dj-hero-viewer>
-    <log-midi-out></log-midi-out>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <dj-hero-viewer></dj-hero-viewer>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <log-midi-out></log-midi-out>
+      </div>
+    </div>
   </div>
 </template>
 

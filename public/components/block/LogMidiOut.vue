@@ -5,25 +5,24 @@
     </div>
     <div class="card-body">
       <div class="card-text" >
-        <table class="table table-striped">
+        <table class="table table-striped table-sm">
           <thead>
-          <tr>
-            <th>Time</th>
-            <th>Channel</th>
-            <th>Command</th>
-            <th>Param 1</th>
-            <th>Param 2</th>
-          </tr>
+            <tr>
+              <th>Time</th>
+              <th>Channel</th>
+              <th>Command</th>
+              <th>Param 1</th>
+              <th>Param 2</th>
+            </tr>
           </thead>
-          <tbody>
-          <tr v-for="log in logs">
-            <td>{{ log.time }}</td>
-            <td>{{ log.channel }}</td>
-            <td>{{ log.command }}</td>
-            <td>{{ log.param1 }}</td>
-            <td>{{ log.param2 }}</td>
-          </tr>
-
+          <tbody class="small">
+            <tr v-for="log in logs">
+              <td>{{ log.time }}</td>
+              <td>{{ log.channel }}</td>
+              <td>{{ log.command }}</td>
+              <td>{{ log.param1 }}</td>
+              <td>{{ log.param2 }}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -38,13 +37,14 @@ export default {
     this.midiMsg = new MidiMsg();
     window.emitter.on("midiOut", (data)=> {
       this.logs.unshift(this.midiMsg2log(data));
-      this.logs = this.logs.slice(0,15);
+      this.logs = this.logs.slice(0,this.nbLog);
     });
   },
   data() {
     return {
       logs: [],
-      midiMsg: null
+      midiMsg: null,
+      nbLog: 10
     }
   },
   methods: {
@@ -55,13 +55,13 @@ export default {
       log.channel = (data[0] & 0xf) + 1;
       log.command = this.midiMsg.cmds[cmd];
       if (cmd == 11) {//CC
-        log.param1 = data[1] + " (" + this.midiMsg.ccs[data[1]] + ")";
+        log.param1 = data[1] + (this.midiMsg.ccs[data[1]] ==""?"":" (" + this.midiMsg.ccs[data[1]] + ")");
       } else if (cmd == 8 || cmd == 9) {
-        log.param1 = data[1] + " (note?)";
+        log.param1 = data[1] + " ("+this.midiMsg.midiNote(data[1])+ ")";
       } else {
         log.param1 = data[1];
       }
-      log.param2 = data[2];
+      log.param2 = (cmd == 8 || cmd == 9?"Velocity=":"")+data[2];
       return log;
     }
   }
@@ -70,5 +70,10 @@ export default {
 }
 </script>
 <style>
-
+  .small {
+    font-size:0.85rem;
+  }
+  td, th {
+    width: 20%;
+  }
 </style>
