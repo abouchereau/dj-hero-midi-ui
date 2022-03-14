@@ -28,7 +28,6 @@ socket.on('request', (request) => {
                     midiNode.openFromIndex(value);
                 }
                 if (key == "currentMIDIChannel" && Number.isInteger(value) && value>=0 && value<=15) {
-                    console.log("currentMIDIChannel", value);
                     manager.currentMIDIChannel = value;
                 }
             }            
