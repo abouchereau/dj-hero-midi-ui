@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h5>Settings</h5>
-   <midi-out-devices></midi-out-devices>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2 col-sm-12">
+        <midi-out-devices></midi-out-devices>
+      </div>
+    </div>
   </div>
 </template>
 

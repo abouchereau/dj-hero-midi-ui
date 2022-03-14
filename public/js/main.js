@@ -33,6 +33,7 @@ class Main {
             }
         };
         setTimeout(()=> {
+            console.log("INIT");
             this.socket.send("INIT");
         },500);
     }

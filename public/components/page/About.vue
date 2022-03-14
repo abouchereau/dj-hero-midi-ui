@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-center">
+    <div class="text-center mt-5">
       <img src="/icones/tony-b.svg" style="max-width:300px;"/>
       <h4>DJ Hero Midi</h4>
       by Anthony BOUCHEREAU - 2022<br />

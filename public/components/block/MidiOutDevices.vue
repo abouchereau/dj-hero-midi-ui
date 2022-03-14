@@ -1,27 +1,49 @@
 <template>
   <div>
 
-    <div class="card border-primary mb-3" style="max-width: 30rem;">
-      <div class="card-header">Select MIDI Output</div>
-      <div class="card-body">
-        <div class="card-text" :key="refreshKey">
-          <div class="bs-component" v-if="$main.midiOutDevices!=null">
-            <ul class="list-group">
-              <li v-for="(item, index) in $main.midiOutDevices" @click="$main.setMidiOutIndex(index)" :class="{ 'active': index==$main.midiOutIndex, 'list-group-item' : true, 'list-group-item-action':true}" >
-                {{ item }}
-              </li>
-            </ul>
-          </div>
-          <div class="alert alert-dismissible alert-warning" v-if="$main.midiOutDevices!=null && $main.midiOutDevices.length==0">
-            <p class="mb-0">No Midi Devices Connected</p>
-          </div>
-          <div class="alert" v-if="$main.midiOutDevices==null">
-            <p class="text-center"><i class="icon-spinner icon-2x icon-spin"></i><br />Scanning MIDI outputs</p>
+    <div class="row">
+      <div class="col-md-7">
+
+        <div class="card border-primary">
+          <div class="card-header">MIDI Output</div>
+          <div class="card-body">
+            <div class="card-text" :key="refreshKey">
+              <div class="bs-component" v-if="$main.midiOutDevices!=null">
+                <ul class="list-group">
+                  <li v-for="(item, index) in $main.midiOutDevices" @click="$main.setMidiOutIndex(index)" :class="{ 'active': index==$main.midiOutIndex, 'list-group-item' : true, 'list-group-item-action':true}" >
+                    {{ item }}
+                  </li>
+                </ul>
+              </div>
+              <div class="alert alert-dismissible alert-warning" v-if="$main.midiOutDevices!=null && $main.midiOutDevices.length==0">
+                <p class="mb-0">No Midi Devices Connected</p>
+              </div>
+              <div class="alert" v-if="$main.midiOutDevices==null">
+                <p class="text-center"><i class="icon-spinner icon-2x icon-spin"></i><br />Scanning MIDI outputs</p>
+              </div>
+            </div>
           </div>
         </div>
+
+
+      </div>
+
+      <div class="col-md-5">
+
+        <div class="card border-primary">
+          <div class="card-header">MIDI Default Channel</div>
+          <div class="card-body">
+            <div class="card-text" :key="refreshKey">
+              <select class="form-select" v-model="midiDefaultChannel">
+                <option v-for="i in 16" :value="i">{{ i }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
-
   </div>
 </template>
 
@@ -30,7 +52,8 @@ export default {
   name: 'midi-out-devices',
   data() {
     return {
-      refreshKey: 0
+      refreshKey: 0,
+      midiDefaultChannel: 1
     }
   },
   mounted() {

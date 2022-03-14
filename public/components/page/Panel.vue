@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-lg-8 offset-lg-2 col-sm-12">
         <dj-hero-viewer></dj-hero-viewer>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 offset-md-2">
+      <div class="col-lg-8 offset-lg-2 col-sm-12">
         <log-midi-out></log-midi-out>
       </div>
     </div>

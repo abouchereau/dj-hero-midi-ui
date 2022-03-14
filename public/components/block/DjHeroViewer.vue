@@ -11,7 +11,7 @@
         <div class="card-text" >
 
           <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
 
               <div class="row">
 
@@ -44,7 +44,7 @@
               </div>
               <div class="row mt-3">
 
-                <div class="col-4 text-center">
+                <div class="col-md-4 text-center">
 
                   <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="knob" id="knob1" autocomplete="off">
@@ -68,7 +68,7 @@
               </div>
             </div>
 
-            <div class="col-4 text-center p-1">
+            <div class="col-md-4 text-center p-1">
 
               <div >
                 <img src="/icones/tony-b.svg" id="disc"/>
