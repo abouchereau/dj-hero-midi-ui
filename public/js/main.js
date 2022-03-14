@@ -1,8 +1,9 @@
 class Main {
 
-    socket = null;
-    midiOutIndex = 0;
+    socket = null;    
+    currentMIDIChannel = 0;
     midiOutDevices = null;
+    midiOutIndex = 0;
     djheroConnected = false;
 
     constructor() {
@@ -24,8 +25,12 @@ class Main {
                     window.emitter.emit('socketLoaded');
                 }
                 else if (key == "djheroChange") {
-                    window.emitter.emit('djheroChange',data[key]);
                     this.djheroConnected = data[key];
+                    window.emitter.emit('djheroChange',data[key]);
+                }
+                else if (key == "currentMIDIChannel") {
+                    this.currentMIDIChannel = data[key]+1;
+                    window.emitter.emit('currentMIDIChannel');
                 }
                 else if (key == "midiOut") {
                     window.emitter.emit('midiOut',data[key]);
@@ -44,5 +49,11 @@ class Main {
 
     sendMidiOutIndex(index) {
         this.socket.send(JSON.stringify({"midiOutIndex": index}));
+    }
+
+    setCurrentMIDIChannel(channel) {
+        this.currentMIDIChannel = channel;
+        this.socket.send(JSON.stringify({"currentMIDIChannel": this.currentMIDIChannel-1 }));
+
     }
 }

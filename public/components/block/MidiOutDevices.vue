@@ -33,8 +33,8 @@
         <div class="card border-primary">
           <div class="card-header">MIDI Default Channel</div>
           <div class="card-body">
-            <div class="card-text" :key="refreshKey">
-              <select class="form-select" v-model="midiDefaultChannel">
+            <div class="card-text" :key="refreshKey2">
+              <select class="form-select" v-model="currentMIDIChannel">
                 <option v-for="i in 16" :value="i">{{ i }}</option>
               </select>
             </div>
@@ -53,13 +53,23 @@ export default {
   data() {
     return {
       refreshKey: 0,
-      midiDefaultChannel: 1
+      refreshKey2: 0,
+      currentMIDIChannel: 1
     }
   },
   mounted() {
     window.emitter.on('socketLoaded',()=> {
       this.refreshKey++;
     });
+    window.emitter.on('currentMIDIChannel',()=> {
+      this.currentMIDIChannel = this.$main.currentMIDIChannel;
+      this.refreshKey2++;
+    })
+  },
+  watch: {//TODO remettre la logique main.js
+    currentMIDIChannel(newChannel) {
+      this.$main.setCurrentMIDIChannel(newChannel);
+    }
   }
 
 

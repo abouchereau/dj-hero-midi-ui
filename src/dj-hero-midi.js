@@ -27,6 +27,10 @@ socket.on('request', (request) => {
                 if (key == "midiOutIndex") {
                     midiNode.openFromIndex(value);
                 }
+                if (key == "currentMIDIChannel" && Number.isInteger(value) && value>=0 && value<=15) {
+                    console.log("currentMIDIChannel", value);
+                    manager.currentMIDIChannel = value;
+                }
             }            
         }       
     });
@@ -34,7 +38,7 @@ socket.on('request', (request) => {
 
 function init() {
     midiNode.scanOutput(()=>{
-        let json = {'midiOutDevices': midiNode.devices};
+        let json = {'midiOutDevices': midiNode.devices, 'currentMIDIChannel': manager.currentMIDIChannel};
         connection.send(JSON.stringify(json));
         initDJHeroPs();
     });
