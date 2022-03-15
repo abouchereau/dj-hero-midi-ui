@@ -9,37 +9,44 @@ const HID = require('node-hid');
 let midiNode = new MidiNode();
 const socket = new server({httpServer: http.createServer().listen(Const.SOCKET_PORT, ()=>{})});
 let connection = null;
-let manager = null;
+let manager = new Manager(midiNode);
+let djHeroPSConnected = false;
 
-socket.on('error', (err)=>console.error("Error: " + err.message));
-socket.on('request', (request) => {
-    connection = request.accept(null, request.origin);
-    manager = new Manager(midiNode, connection, 0);
-    console.log("Socket connected through port " + Const.SOCKET_PORT);
-    connection.on('message', (msg) => {
-        if (msg.utf8Data == "INIT") {
-            init();
-        }
-        else {
-            let json = JSON.parse(msg.utf8Data);
-            for (let key in json) {
-                let value = json[key];
-                if (key == "midiOutIndex") {
-                    midiNode.openFromIndex(value);
-                }
-                if (key == "currentMIDIChannel" && Number.isInteger(value) && value>=0 && value<=15) {
-                    manager.currentMIDIChannel = value;
-                }
-            }            
-        }       
-    });
+midiNode.scanOutput(manager.midiIndex, ()=>{
+    initSocket();
+    setInterval(()=>{
+        initDJHeroPs();
+    },1000);
 });
 
-function init() {
-    midiNode.scanOutput(()=>{
-        let json = {'midiOutDevices': midiNode.devices, 'currentMIDIChannel': manager.currentMIDIChannel};
-        connection.send(JSON.stringify(json));
-        initDJHeroPs();
+function initSocket() {
+    socket.on('error', (err) => console.error("Error: " + err.message));
+    socket.on('request', (request) => {
+        connection = request.accept(null, request.origin);
+        manager.setSocketConnection(connection);
+        console.log("Socket connected through port " + Const.SOCKET_PORT);
+        connection.on('message', (msg) => {
+            if (msg.utf8Data == "INIT") {
+                let json = {
+                    'midiOutDevices': midiNode.devices,
+                    'currentMIDIChannel': manager.currentMIDIChannel,
+                    'mappings': {}
+                };
+                connection.send(JSON.stringify(json));
+            } else {
+                let json = JSON.parse(msg.utf8Data);
+                for (let key in json) {
+                    let value = json[key];
+                    if (key == "midiOutIndex") {
+                        midiNode.openFromIndex(value);
+                        manager.setMidiIndex(value);
+                    }
+                    if (key == "currentMIDIChannel" && Number.isInteger(value) && value >= 0 && value <= 15) {
+                        manager.setCurrentMIDIChannel(value);
+                    }
+                }
+            }
+        });
     });
 }
 
@@ -48,13 +55,20 @@ function initDJHeroPs() {
     let oneConnected = false;
     for (let device of devices) {
         if (device.vendorId == DeviceDJHeroPS.VENDOR_ID && device.productId == DeviceDJHeroPS.PRODUCT_ID) {
-            let deviceDJHeroPS = new DeviceDJHeroPS(manager);
-            deviceDJHeroPS.init();
-            oneConnected = true;
+            if (!djHeroPSConnected) {
+                let deviceDJHeroPS = new DeviceDJHeroPS(manager);
+                deviceDJHeroPS.init();
+                oneConnected = true;
+            }
         }
     }
-    let json = {'djheroConnected':oneConnected};
-    connection.send(JSON.stringify(json));
+    if (oneConnected != djHeroPSConnected) {
+        djHeroPSConnected = oneConnected;
+        if (connection != null) {
+            let json = {'djheroConnected':oneConnected};
+            connection.send(JSON.stringify(json));
+        }
+    }
 }
 
 
