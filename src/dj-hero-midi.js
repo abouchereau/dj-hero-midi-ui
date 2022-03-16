@@ -10,7 +10,8 @@ let midiNode = new MidiNode();
 const socket = new server({httpServer: http.createServer().listen(Const.SOCKET_PORT, ()=>{})});
 let connection = null;
 let manager = new Manager(midiNode);
-let djHeroPSConnected = false;
+let djHeroPSInitialized = false;
+let deviceDJHeroPS = null;
 
 midiNode.scanOutput(manager.midiIndex, ()=>{
     initSocket();
@@ -50,25 +51,34 @@ function initSocket() {
     });
 }
 
-function initDJHeroPs() {
+function checkDeviceConnected(vendorId, productId) {
     let devices = HID.devices();
-    let oneConnected = false;
+    let isConnected = false;
     for (let device of devices) {
-        if (device.vendorId == DeviceDJHeroPS.VENDOR_ID && device.productId == DeviceDJHeroPS.PRODUCT_ID) {
-            if (!djHeroPSConnected) {
-                let deviceDJHeroPS = new DeviceDJHeroPS(manager);
-                deviceDJHeroPS.init();
-                oneConnected = true;
-            }
+        if (device.vendorId == vendorId && device.productId == productId) {
+            isConnected = true;
         }
     }
-    if (oneConnected != djHeroPSConnected) {
-        djHeroPSConnected = oneConnected;
-        if (connection != null) {
-            let json = {'djheroConnected':oneConnected};
-            connection.send(JSON.stringify(json));
-        }
+    return isConnected;
+}
+
+function initDJHeroPs() {
+    let checkConnected = checkDeviceConnected(DeviceDJHeroPS.VENDOR_ID, DeviceDJHeroPS.PRODUCT_ID);
+    let sendSocket = false;
+    if (checkConnected && !djHeroPSInitialized) {
+        deviceDJHeroPS = new DeviceDJHeroPS(manager);
+        deviceDJHeroPS.init();
+        djHeroPSInitialized = true;
+        sendSocket = true;
     }
+
+
+    if (sendSocket && connection != null) {
+        let json = {'djheroConnected':djHeroPSInitialized};
+        connection.send(JSON.stringify(json));
+    }
+
+
 }
 
 
