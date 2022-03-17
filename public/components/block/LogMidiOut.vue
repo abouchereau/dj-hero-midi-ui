@@ -69,7 +69,7 @@ export default {
 
 }
 </script>
-<style>
+<style scoped>
   .small {
     font-size:0.85rem;
   }

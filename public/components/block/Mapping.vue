@@ -7,57 +7,55 @@
       <div class="card-text">
         <table class="table">
           <tr>
-            <td rowspan="2" class="align-middle">START</td><td>Press</td><td>
-              <mapping-form></mapping-form>
-            </td>
+            <td rowspan="2" class="align-middle">START</td><td>Press</td><td class="align-middle"><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">SELECT</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">SELECT</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 1</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">HOME + KNOB 1</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 2</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">HOME + KNOB 2</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 3</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">HOME + KNOB 3</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 4</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">HOME + KNOB 4</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">CROSS</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">CROSS</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">TRIANGLE</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">TRIANGLE</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">SQUARE</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">SQUARE</td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td>...</td>
