@@ -31,7 +31,8 @@ function initSocket() {
                 let json = {
                     'midiOutDevices': midiNode.devices,
                     'currentMIDIChannel': manager.currentMIDIChannel,
-                    'mappings': {}
+                    'mappings': manager.mappings,
+                    'mappingKey': manager.mappingKey
                 };
                 connection.send(JSON.stringify(json));
             } else {

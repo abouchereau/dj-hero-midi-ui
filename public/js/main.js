@@ -5,6 +5,7 @@ class Main {
     midiOutDevices = null;
     midiOutIndex = 0;
     djheroConnected = false;
+    mappingKey = 0;
 
     constructor() {
         this.initSocket();
@@ -14,7 +15,7 @@ class Main {
         this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
         this.socket.onmessage = (msg) => {
             let data = JSON.parse(msg.data);
-            console.log("SOCKET", JSON.stringify(data));
+            //console.log("SOCKET", JSON.stringify(data, null, 4));
             for (let key in data) {
                 if (key == "midiOutDevices") {
                     this.midiOutDevices = data[key];
@@ -31,6 +32,11 @@ class Main {
                 else if (key == "currentMIDIChannel") {
                     this.currentMIDIChannel = data[key]+1;
                     window.emitter.emit('currentMIDIChannel');
+                }
+                else if (key == "mappingKey") {
+                    this.mappingKey = data[key];
+                    console.log("Mapping Key = ", this.mappingKey);
+                    window.emitter.emit('mappingKey');
                 }
                 else if (key == "midiOut") {
                     window.emitter.emit('midiOut',data[key]);

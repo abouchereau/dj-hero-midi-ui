@@ -1,7 +1,7 @@
 <template>
   <div class="card border-info mb-3">
     <div class="card-header">
-      Mapping
+      Mapping <span class="badge bg-primary">{{ mappingKey }}</span>
     </div>
     <div class="card-body">
       <div class="card-text">
@@ -94,16 +94,15 @@ export default {
     'mapping-form': Vue.defineAsyncComponent(() => loadModule('./components/block/MappingForm.vue', Utils.loadModuleOptions()))
   },
   mounted() {
-
+    window.emitter.on('mappingKey',(a)=>{
+      this.mappingKey = this.$main.mappingKey;
+    });
   },
   data() {
     return {
-
+      mappingKey: 0
     }
   },
-  methods: {
-
-  }
 
 
 }

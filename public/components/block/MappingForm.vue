@@ -8,9 +8,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Ch.</span>
           </div>
-          <select class="custom-select text-small" v-model="curChannel">
-            <option value="" :selected="curChannel == ''">Default</option>
-            <option v-for="i in 16" :selected="curChannel == i" :value="i">{{ i }}</option>
+          <select class="custom-select text-small" v-model="channel">
+            <option value="" :selected="channel == null">Default</option>
+            <option v-for="i in 16" :selected="channel == i" :value="i">{{ i }}</option>
           </select>
         </div>
       </div>
@@ -22,8 +22,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Type</span>
           </div>
-          <select class="custom-select text-small" v-model="curCmd">
-            <option v-for="(val, index) in cmdList" :selected="index == curCmd" :value="index+8">{{ val }}</option>
+          <select class="custom-select text-small" v-model="cmd">
+            <option v-for="(val, index) in cmdList" :selected="index == cmd" :value="index+8">{{ val }}</option>
           </select>
         </div>
 
@@ -35,16 +35,16 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Param 1</span>
           </div>
-          <select v-if="(curCmd==8 || curCmd==9) && curChannel!=10" class="custom-select text-small" v-model="param1">
+          <select v-if="(cmd==8 || cmd==9) && channel!=10" class="custom-select text-small" v-model="param1">
             <option v-for="(val, index) in noteList" :selected="index == param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="(curCmd==8 || curCmd==9) && curChannel==10" class="custom-select text-small" v-model="param1">
+          <select v-else-if="(cmd==8 || cmd==9) && channel==10" class="custom-select text-small" v-model="param1">
             <option v-for="(val, index) in drumList" :selected="index == param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="curCmd==11" class="custom-select text-small" v-model="param1">
+          <select v-else-if="cmd==11" class="custom-select text-small" v-model="param1">
             <option v-for="(val, index) in ccList" :selected="index == param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="curCmd==12" class="custom-select text-small" v-model="param1">
+          <select v-else-if="cmd==12" class="custom-select text-small" v-model="param1">
             <option v-for="(val, index) in insList" :selected="index == param1" :value="index">{{ val }}</option>
           </select>
           <select v-else class="custom-select text-small" v-model="param1">
@@ -73,17 +73,19 @@
 <script>
 export default {
     name: 'mapping-form',
+    props: {
+      channel: null,
+      cmd: null,
+      param1: null,
+      param2: null
+    },
     data() {
       return {
-        curChannel: "",
-        curCmd: 8,
         cmdList: [],
         ccList: [],
         insList: [],
         drumList: [],
         noteList: [],
-        param1: null,
-        param2: null
       }
     },
    mounted() {
