@@ -8,9 +8,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Ch.</span>
           </div>
-          <select class="custom-select text-small" v-model="channel">
-            <option value="" :selected="channel == null">Default</option>
-            <option v-for="i in 16" :selected="channel == i" :value="i">{{ i }}</option>
+          <select class="custom-select text-small" v-model="obj.channel">
+            <option value="" :selected="true">Default</option>
+            <option v-for="i in 16" :selected="obj.channel == i" :value="i">{{ i }}</option>
           </select>
         </div>
       </div>
@@ -22,8 +22,8 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Type</span>
           </div>
-          <select class="custom-select text-small" v-model="cmd">
-            <option v-for="(val, index) in cmdList" :selected="index == cmd" :value="index+8">{{ val }}</option>
+          <select class="custom-select text-small" v-model="obj.message">
+            <option v-for="(val, index) in cmdList" :selected="index == obj.message" :value="index+8">{{ val }}</option>
           </select>
         </div>
 
@@ -35,33 +35,55 @@
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Param 1</span>
           </div>
-          <select v-if="(cmd==8 || cmd==9) && channel!=10" class="custom-select text-small" v-model="param1">
-            <option v-for="(val, index) in noteList" :selected="index == param1" :value="index">{{ val }}</option>
+          <select v-if="(obj.message==8 || obj.message==9) && obj.channel!=10" class="custom-select text-small" v-model="obj.param1">
+            <option v-for="(val, index) in noteList" :selected="index == obj.param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="(cmd==8 || cmd==9) && channel==10" class="custom-select text-small" v-model="param1">
-            <option v-for="(val, index) in drumList" :selected="index == param1" :value="index">{{ val }}</option>
+          <select v-else-if="(obj.message==8 || obj.message==9) && obj.channel==10" class="custom-select text-small" v-model="obj.param1">
+            <option v-for="(val, index) in drumList" :selected="index == obj.param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="cmd==11" class="custom-select text-small" v-model="param1">
-            <option v-for="(val, index) in ccList" :selected="index == param1" :value="index">{{ val }}</option>
+          <select v-else-if="obj.message==11" class="custom-select text-small" v-model="obj.param1">
+            <option v-for="(val, index) in ccList" :selected="index == obj.param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else-if="cmd==12" class="custom-select text-small" v-model="param1">
-            <option v-for="(val, index) in insList" :selected="index == param1" :value="index">{{ val }}</option>
+          <select v-else-if="obj.message==12" class="custom-select text-small" v-model="obj.param1">
+            <option v-for="(val, index) in insList" :selected="index == obj.param1" :value="index">{{ val }}</option>
           </select>
           <select v-else class="custom-select text-small" v-model="param1">
-            <option v-for="val in 128" :selected="val == param1" :value="val">{{ val }}</option>
+            <option v-for="val in 128" :selected="val == obj.param1" :value="val">{{ val }}</option>
           </select>
 
         </div>
 
       </div>
 
-      <div class="col py-1">
+      <div class="col py-1" v-if="obj.min == null">
 
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Param 2</span>
           </div>
-          <input type="number" min="1" max="128" v-model="param2" class="custom-select">
+          <input type="number" min="1" max="128" v-model="obj.param2" class="custom-select">
+        </div>
+
+      </div>
+
+      <div class="col py-1" v-if="obj.min != null">
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-small">Min</span>
+          </div>
+          <input type="number" min="1" max="128" v-model="obj.param2min" class="custom-select">
+        </div>
+
+      </div>
+
+      <div class="col py-1" v-if="obj['max'] != null">
+
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text text-small">Max</span>
+          </div>
+          <input type="number" min="1" max="128" v-model="obj.param2max" class="custom-select">
         </div>
 
       </div>
@@ -74,10 +96,13 @@
 export default {
     name: 'mapping-form',
     props: {
-      channel: null,
-      cmd: null,
+      obj: Object
+    /*  channel: null,
+      message: null,
       param1: null,
-      param2: null
+      param2: null,
+      min: null,
+      max: null,*/
     },
     data() {
       return {

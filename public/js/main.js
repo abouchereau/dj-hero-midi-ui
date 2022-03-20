@@ -6,6 +6,7 @@ class Main {
     midiOutIndex = 0;
     djheroConnected = false;
     mappingKey = 0;
+    mappings = [];
 
     constructor() {
         this.initSocket();
@@ -35,11 +36,14 @@ class Main {
                 }
                 else if (key == "mappingKey") {
                     this.mappingKey = data[key];
-                    console.log("Mapping Key = ", this.mappingKey);
                     window.emitter.emit('mappingKey');
                 }
                 else if (key == "midiOut") {
                     window.emitter.emit('midiOut',data[key]);
+                }
+                else if (key == "mappings") {
+                    this.mappings = data[key];
+                    window.emitter.emit('mappings',data[key]);
                 }
             }
         };

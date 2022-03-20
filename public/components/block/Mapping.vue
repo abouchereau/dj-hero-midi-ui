@@ -29,9 +29,9 @@
           <tr>
             <td rowspan="2" class="align-middle">
               <button class="btn btn-outline-info btn-sm" ref="btn-left">START</button>
-            </td><td>Press</td><td class="align-middle"><mapping-form></mapping-form></td>
+            </td><td>Press</td><td class="align-middle"><mapping-form v-for="obj in mapping['START_PRESS']" :obj="obj"></mapping-form></td>
           </tr>
-          <tr>
+        <!--  <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
@@ -43,7 +43,7 @@
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">
+            <td rowspan="2" class="align-middle nobr">
               <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">1</button>
             </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
@@ -51,7 +51,7 @@
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">
+            <td rowspan="2" class="align-middle nobr">
               <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">2</button>
             </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
@@ -59,7 +59,7 @@
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">
+            <td rowspan="2" class="align-middle nobr">
               <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">3</button>
             </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
@@ -67,7 +67,7 @@
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">
+            <td rowspan="2" class="align-middle nobr">
               <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">4</button>
             </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
@@ -96,7 +96,7 @@
             </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td rowspan="2" class="align-middle">
@@ -107,20 +107,25 @@
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td><td colspan="2"><mapping-form></mapping-form></td>
+            <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td>
+            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/></td><td colspan="2"><mapping-form></mapping-form></td>
+            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/></td>
+            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + BLUE</td><td colspan="2"><mapping-form></mapping-form></td>
+            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-blue"></div></td>
+            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + GREEN</td><td colspan="2"><mapping-form></mapping-form></td>
+            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-green"></div></td>
+            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + RED</td><td colspan="2"><mapping-form></mapping-form></td>
-          </tr>
+            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-red"></div></td>
+            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
+          </tr>-->
         </table>
       </div>
     </div>
@@ -136,11 +141,23 @@ export default {
   mounted() {
     window.emitter.on('mappingKey',(a)=>{
       this.mappingKey = this.$main.mappingKey;
+      if (this.$main.mappings[this.mappingKey] != null) {
+        this.mapping = this.$main.mappings[this.mappingKey];
+        console.log("MAPPING1", this.mapping);
+      }
+    });
+    window.emitter.on('mappings',(a)=>{
+      this.mappingKey = this.$main.mappingKey;
+      if (this.$main.mappings[this.mappingKey] != null) {
+        this.mapping = this.$main.mappings[this.mappingKey];
+        console.log("MAPPING2", this.mapping);
+      }
     });
   },
   data() {
     return {
-      mappingKey: 0
+      mappingKey: 0,
+      mapping: {}
     }
   },
 
@@ -148,7 +165,28 @@ export default {
 }
 </script>
 <style>
-.table > :not(caption) > * > * {
-  padding: 0.375rem 0.75rem;
+.btn {
+  padding: 0.375rem 0.75rem !important;
 }
+.disc-btn {
+  display:inline-block;
+  background-color: #000 !important;
+  width:30px;
+  height:40px;
+  border-radius: 18px;
+  border: 3px solid #FFF;
+}
+.disc-btn-red {
+  border-color: red;
+}
+.disc-btn-green {
+   border-color: green;
+ }
+.disc-btn-blue {
+    border-color: blue;
+}
+.nobr {
+  white-space: nowrap;
+}
+
 </style>
