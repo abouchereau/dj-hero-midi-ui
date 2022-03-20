@@ -5,81 +5,121 @@
     </div>
     <div class="card-body">
       <div class="card-text">
+
         <table class="table">
           <tr>
-            <td rowspan="2" class="align-middle">START</td><td>Press</td><td class="align-middle"><mapping-form></mapping-form></td>
+            <td class="align-middle">
+              <button class="btn btn-outline-info" ref="btn-left"><i class="icon-arrow-left"></i></button>
+            </td><td colspan="2">Default Channel -1</td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <button class="btn btn-outline-info" ref="btn-right"><i class="icon-arrow-right"></i></button>
+            </td><td colspan="2">Default Channel +1</td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <button class="btn btn-outline-info" ref="btn-down"><i class="icon-arrow-down"></i></button></td><td colspan="2">Current Mapping -1</td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <button class="btn btn-outline-info" ref="btn-up"><i class="icon-arrow-up"></i></button>
+            </td><td colspan="2">Current Mapping +1</td>
+          </tr>
+          <tr>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-sm" ref="btn-left">START</button>
+            </td><td>Press</td><td class="align-middle"><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">SELECT</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-sm">SELECT</button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 1</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">1</button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 2</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">2</button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 3</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">3</button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">HOME + KNOB 4</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">4</button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">CROSS</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-ps"><img src="/icones/cross.svg" /></button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">TRIANGLE</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-ps"><img src="/icones/triangle.svg" /></button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">SQUARE</td><td>Press</td><td><mapping-form></mapping-form></td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-ps"><img src="/icones/square.svg" /></button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
             <td>Release</td><td>...</td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">CIRCLE</td><td>Press</td><td>...</td>
+            <td rowspan="2" class="align-middle">
+              <button class="btn btn-outline-info btn-ps"><img src="/icones/circle.svg" /></button>
+            </td><td>Press</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td>Release</td><td>...</td>
+            <td>Release</td><td><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle">FADER</td><td colspan="2">...</td>
+            <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td><td colspan="2"><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle">DISC ONLY</td><td colspan="2">...</td>
+            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/></td><td colspan="2"><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle">DISC + BLUE</td><td colspan="2">...</td>
+            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + BLUE</td><td colspan="2"><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle">DISC + GREEN</td><td colspan="2">...</td>
+            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + GREEN</td><td colspan="2"><mapping-form></mapping-form></td>
           </tr>
           <tr>
-            <td class="align-middle">DISC + RED</td><td colspan="2">...</td>
+            <td class="align-middle"><img src="/icones/tony-b.svg" style="max-width:70px;"/> + RED</td><td colspan="2"><mapping-form></mapping-form></td>
           </tr>
         </table>
       </div>
@@ -108,5 +148,7 @@ export default {
 }
 </script>
 <style>
-
+.table > :not(caption) > * > * {
+  padding: 0.375rem 0.75rem;
+}
 </style>
