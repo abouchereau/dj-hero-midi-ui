@@ -43,6 +43,7 @@ class Main {
                 }
                 else if (key == "mappings") {
                     this.mappings = data[key];
+                    console.log("MMAPPING", this.mappings);
                     window.emitter.emit('mappings',data[key]);
                 }
             }

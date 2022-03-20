@@ -9,7 +9,7 @@
             <span class="input-group-text text-small">Ch.</span>
           </div>
           <select class="custom-select text-small" v-model="obj.channel">
-            <option value="" :selected="true">Default</option>
+            <option value="">Default</option>
             <option v-for="i in 16" :selected="obj.channel == i" :value="i">{{ i }}</option>
           </select>
         </div>
@@ -17,7 +17,6 @@
 
 
       <div class="col py-1">
-
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Type</span>
@@ -26,11 +25,10 @@
             <option v-for="(val, index) in cmdList" :selected="index == obj.message" :value="index+8">{{ val }}</option>
           </select>
         </div>
-
       </div>
 
-      <div class="col py-1">
 
+      <div class="col py-1">
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Param 1</span>
@@ -50,43 +48,39 @@
           <select v-else class="custom-select text-small" v-model="param1">
             <option v-for="val in 128" :selected="val == obj.param1" :value="val">{{ val }}</option>
           </select>
-
         </div>
-
       </div>
 
-      <div class="col py-1" v-if="obj.min == null">
 
+      <div class="col py-1" v-if="obj.min == null">
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Param 2</span>
           </div>
-          <input type="number" min="1" max="128" v-model="obj.param2" class="custom-select">
+          <input type="number" min="1" max="128" v-model="obj.param2" class="custom-select text-small">
         </div>
-
       </div>
 
-      <div class="col py-1" v-if="obj.min != null">
 
+      <div class="col py-1" v-if="obj.min != null">
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Min</span>
           </div>
           <input type="number" min="1" max="128" v-model="obj.param2min" class="custom-select">
         </div>
-
       </div>
 
-      <div class="col py-1" v-if="obj['max'] != null">
 
+      <div class="col py-1" v-if="obj['max'] != null">
         <div class="input-group input-group-sm">
           <div class="input-group-prepend">
             <span class="input-group-text text-small">Max</span>
           </div>
           <input type="number" min="1" max="128" v-model="obj.param2max" class="custom-select">
         </div>
-
       </div>
+
 
     </div>
   </div>
@@ -128,13 +122,23 @@ export default {
      for (let i = 35;i<82;i++) {
        this.drumList[i] = i+ (this.midiMsg.drums[i] ==""?"":". " + this.midiMsg.drums[i]);
      }
-   }
+     if (this.obj['channel'] == null) {
+       this.obj.channel = "";
+     }
+   },
+  watch: {
+      obj(newObj, oldObj) {
+        if (this.obj['channel'] == null) {
+          this.obj.channel = "";
+        }
+      }
+  }
 
 }
 </script>
 <style scoped>
 .text-small {
-  font-size:70%;
+  font-size:75%;
 }
 .custom-select {
   display: inline-block;
