@@ -31,101 +31,101 @@
               <button class="btn btn-outline-info btn-sm" ref="btn-left">START</button>
             </td><td>Press</td><td class="align-middle"><mapping-form v-for="obj in mapping['START_PRESS']" :obj="obj"></mapping-form></td>
           </tr>
-        <!--  <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
+          <tr>
+            <td>Release</td><td><mapping-form v-for="obj in mapping['START_RELEASE']" :obj="obj"></mapping-form></td>
           </tr>
           <tr>
-            <td rowspan="2" class="align-middle">
-              <button class="btn btn-outline-info btn-sm">SELECT</button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle nobr">
-              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">1</button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle nobr">
-              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">2</button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle nobr">
-              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">3</button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle nobr">
-              <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">4</button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle">
-              <button class="btn btn-outline-info btn-ps"><img src="/icones/cross.svg" /></button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle">
-              <button class="btn btn-outline-info btn-ps"><img src="/icones/triangle.svg" /></button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle">
-              <button class="btn btn-outline-info btn-ps"><img src="/icones/square.svg" /></button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td rowspan="2" class="align-middle">
-              <button class="btn btn-outline-info btn-ps"><img src="/icones/circle.svg" /></button>
-            </td><td>Press</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td>Release</td><td><mapping-form></mapping-form></td>
-          </tr>
-          <tr>
-            <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td>
-            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
-          </tr>
-          <tr>
-            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/></td>
-            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
-          </tr>
-          <tr>
-            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-blue"></div></td>
-            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
-          </tr>
-          <tr>
-            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-green"></div></td>
-            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
-          </tr>
-          <tr>
-            <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-red"></div></td>
-            <td colspan="2"><mapping-form :variable="true"></mapping-form></td>
-          </tr>-->
+              <td rowspan="2" class="align-middle">
+                <button class="btn btn-outline-info btn-sm">SELECT</button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['SELECT_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['SELECT_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle nobr">
+                <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">1</button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['HOME1_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['HOME1_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle nobr">
+                <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">2</button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['HOME2_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['HOME2_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle nobr">
+                <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">3</button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['HOME3_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['HOME3_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle nobr">
+                <button class="btn btn-outline-info btn-lg"><i class="icon-home"></i></button> + <button class="btn btn-outline-info btn-sm">4</button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['HOME4_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['HOME4_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle">
+                <button class="btn btn-outline-info btn-ps"><img src="/icones/cross.svg" /></button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['CROSS_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['CROSS_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle">
+                <button class="btn btn-outline-info btn-ps"><img src="/icones/triangle.svg" /></button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['TRIANGLE_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['TRIANGLE_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle">
+                <button class="btn btn-outline-info btn-ps"><img src="/icones/square.svg" /></button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['SQUARE_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['SQUARE_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td rowspan="2" class="align-middle">
+                <button class="btn btn-outline-info btn-ps"><img src="/icones/circle.svg" /></button>
+              </td><td>Press</td><td><mapping-form v-for="obj in mapping['CIRCLE_PRESS']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td>Release</td><td><mapping-form v-for="obj in mapping['CIRCLE_RELEASE']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td>
+              <td colspan="2"><mapping-form v-for="obj in mapping['FADER']" :obj="obj"></mapping-form></td>
+            </tr>
+            <tr>
+              <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/></td>
+              <td colspan="2"><mapping-form v-for="obj in mapping['DISC_ONLY']" :obj="obj"><></mapping-form></td>
+            </tr>
+            <tr>
+              <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-blue"></div></td>
+              <td colspan="2"><mapping-form v-for="obj in mapping['DISC_BLUE']" :obj="obj"><></mapping-form></td>
+            </tr>
+            <tr>
+              <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-green"></div></td>
+              <td colspan="2"><mapping-form v-for="obj in mapping['DISC_GREEN']" :obj="obj"><></mapping-form></td>
+            </tr>
+            <tr>
+              <td class="align-middle nobr"><img src="/icones/tony-b.svg" style="max-width:60px;"/><div class="disc-btn disc-btn-red"></div></td>
+              <td colspan="2"><mapping-form v-for="obj in mapping['DISC_RED']" :obj="obj"></mapping-form></td>
+            </tr>
         </table>
       </div>
     </div>
