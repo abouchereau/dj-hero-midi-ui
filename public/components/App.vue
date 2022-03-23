@@ -13,6 +13,9 @@ export default {
     return {
       appName: Const.APP_NAME,
     }
+  },
+  mounted() {
+    this.$main.initSocket();
   }
 }
 </script>

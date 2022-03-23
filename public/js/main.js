@@ -9,7 +9,7 @@ class Main {
     mappings = [];
 
     constructor() {
-        this.initSocket();
+        //this.initSocket();
     }
 
     initSocket() {
@@ -66,5 +66,9 @@ class Main {
         this.currentMIDIChannel = channel;
         this.socket.send(JSON.stringify({"currentMIDIChannel": this.currentMIDIChannel-1 }));
 
+    }
+
+    get currentMapping() {
+        return this.mappings[this.mappingKey];
     }
 }

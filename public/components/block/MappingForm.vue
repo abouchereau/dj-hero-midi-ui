@@ -45,7 +45,7 @@
           <select v-else-if="obj.message==12" class="custom-select text-small" v-model="obj.param1">
             <option v-for="(val, index) in insList" :selected="index == obj.param1" :value="index">{{ val }}</option>
           </select>
-          <select v-else class="custom-select text-small" v-model="param1">
+          <select v-else class="custom-select text-small" v-model="obj.param1">
             <option v-for="val in 128" :selected="val == obj.param1" :value="val">{{ val }}</option>
           </select>
         </div>
@@ -101,7 +101,7 @@ export default {
         noteList: [],
       }
     },
-   mounted() {
+   created() {
       this.midiMsg = new MidiMsg();
       this.cmdList = this.midiMsg.cmds.slice(8);
       for (let i = 0;i<128;i++) {
@@ -119,14 +119,12 @@ export default {
      if (this.obj['channel'] == null) {
        this.obj.channel = "";
      }
-     console.log("CHANNEL", this.obj.channel);
    },
   watch: {
       obj(newObj, oldObj) {
         if (this.obj['channel'] == null) {
           this.obj.channel = "";
         }
-        console.log("CHANNEL CHANGE", this.obj.channel);
       }
   }
 
