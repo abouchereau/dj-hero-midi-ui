@@ -58,7 +58,7 @@
       </div>
 
       <div class="col py-1 px-1 text-end">
-        <a @click="remove" class="mx-2"><span class="icon-remove text-danger"></span></a>
+        <button @click="remove" class="mx-2 btn btn-sm btn-dark"><span class="icon-remove text-danger"></span></button>
       </div>
 
 
@@ -70,7 +70,9 @@
 export default {
     name: 'mapping-form',
     props: {
-      obj: Object
+      obj: Object,
+      index: Number,
+      item: String
     },
     data() {
       return {
@@ -109,7 +111,7 @@ export default {
   },
   methods: {
       remove() {
-        console.log("REMOVE");
+        this.$main.removeItem(this.item, this.index);
       }
   }
 

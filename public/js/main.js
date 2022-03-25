@@ -13,6 +13,7 @@ class Main {
     }
 
     initSocket() {
+        console.log("INIT SOCKET");
         this.socket = new WebSocket("ws://localhost:" + Const.SOCKET_PORT);
         this.socket.onmessage = (msg) => {
             let data = JSON.parse(msg.data);
@@ -70,5 +71,12 @@ class Main {
 
     get currentMapping() {
         return this.mappings[this.mappingKey];
+    }
+
+    removeItem(item, index) {
+        console.log("BEFORE", JSON.stringify(this.mappings[this.mappingKey][item]));
+        this.mappings[this.mappingKey][item].splice(index,1);
+        console.log("AFTER", JSON.stringify(this.mappings[this.mappingKey][item]));
+        window.emitter.emit('mappings');
     }
 }
