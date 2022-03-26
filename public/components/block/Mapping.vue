@@ -1,7 +1,10 @@
 <template>
   <div class="card border-info mb-3">
     <div class="card-header">
-      Mapping <span class="badge bg-primary">{{ mappingKey }}</span>
+      Mapping
+      <a href="#"><i class="icon-chevron-left"></i></a>
+      <span class="badge bg-primary">{{ mappingKey }}</span>
+      <a href="#"><i class="icon-chevron-right"></i></a>
     </div>
     <div class="card-body">
       <div class="card-text">
@@ -27,6 +30,20 @@
             <td class="align-middle">
               <button class="btn btn-outline-info" ref="btn-up"><i class="icon-arrow-up"></i></button>
             </td><td colspan="3">Current Mapping +1</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>
+              <div class="row">
+                <div class="col text-center d-grid"><button class="btn btn-primary">Channel</button></div>
+                <div class="col text-center d-grid"><button class="btn btn-primary">Type</button></div>
+                <div class="col text-center d-grid"><button class="btn btn-primary">Param 1</button></div>
+                <div class="col text-center d-grid"><button class="btn btn-primary">Param 2</button></div>
+                <div class="col"></div>
+              </div>
+            </td>
+            <td></td>
           </tr>
           <tr>
             <td rowspan="2" class="align-middle">
@@ -128,6 +145,22 @@
               <td class="align-middle">Release</td><td><mapping-form v-for="(obj, index) in mapping['CIRCLE_RELEASE']" item="CIRCLE_RELEASE" :obj="obj" :index="index"></mapping-form></td>
               <td class="align-middle"><button class="btn btn-success btn-sm" @click="addMapping('CIRCLE_RELEASE')"><i class="icon-plus"></i></button></td>
             </tr>
+
+            <tr>
+              <td></td>
+              <td colspan="2">
+                <div class="row">
+                  <div class="col text-center d-grid"><button class="btn btn-primary">Channel</button></div>
+                  <div class="col text-center d-grid"><button class="btn btn-primary">Type</button></div>
+                  <div class="col text-center d-grid"><button class="btn btn-primary">Param 1</button></div>
+                  <div class="col text-center d-grid"><button class="btn btn-primary">Param 2 min</button></div>
+                  <div class="col text-center d-grid"><button class="btn btn-primary">Param 2 max</button></div>
+                  <div class="col"></div>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+
             <tr>
               <td class="align-middle" style="padding:15px 0;"><input type="range" class="form-range" style="max-width:100px;"></td>
               <td colspan="2"><mapping-form v-for="(obj, index) in mapping['FADER']" item="FADER" :obj="obj" :index="index"></mapping-form></td>
